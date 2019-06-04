@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ec.ups.edu.vista;
+package ec.edu.ups.vista;
 
 /**
  *

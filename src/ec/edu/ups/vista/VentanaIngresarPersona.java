@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ec.ups.edu.vista;
+package ec.edu.ups.vista;
 
 import ec.edu.ups.modelo.Persona;
 import java.util.logging.Level;
