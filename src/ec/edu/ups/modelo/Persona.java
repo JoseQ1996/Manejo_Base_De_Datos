@@ -6,6 +6,7 @@
 
 package ec.edu.ups.modelo;
 
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +19,9 @@ public class Persona {
    private String nombres;
    private String apellidos;
    private int edad;
+   private String numeroTelefono;
+   private Date fechaNacimiento;
+   private Double salario;
 
     /**
      * Constructor vacio
@@ -28,13 +32,18 @@ public class Persona {
     /**
      * Constructor con todos los datos
      */
-    public Persona(String cedula, String nombres, String apellidos, int edad) {
+    public Persona(String cedula, String nombres, String apellidos, int edad, String numeroTelefono, Date fechaNacimiento, Double salario) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.edad = edad;
+        this.numeroTelefono = numeroTelefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.salario = salario;
     }
 
+    
+  
     public String getCedula() {
         return cedula;
     }
@@ -109,17 +118,48 @@ public class Persona {
         return edad;
     }
 
-    public void setEdad(int edad) {
+     public void setEdad(int edad)throws Exception {
+        if(edad >= 20 && edad<= 35){
         this.edad = edad;
+        }else{
+        throw new Exception("la edad de la persona puede ser entre 20 y 35 a;os ");
+        }
+     }
+
+    public String getNumeroTelefono() {
+        return numeroTelefono;
     }
 
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Double salario) {
+        this.salario = salario;
+    }
+     
     @Override
     public String toString() {
         return "Persona\n" + 
                 "Cedula=" + cedula + 
                 "\nNombres=" + nombres + 
                 "\nApellidos=" + apellidos + 
-                "\nEdad=" + edad ;
+                "\nEdad=" + edad +
+                "\nFecha Nacimiento =" + fechaNacimiento +
+                "\nCelular =" + numeroTelefono+
+                "\nSalario =" + salario;
     }
 
     

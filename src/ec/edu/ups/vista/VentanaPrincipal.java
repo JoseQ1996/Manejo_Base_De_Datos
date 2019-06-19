@@ -32,6 +32,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menuBuscarPersona = new javax.swing.JMenuItem();
+        menuActualizarPersona = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,11 +41,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         DesktopPane.setLayout(DesktopPaneLayout);
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 897, Short.MAX_VALUE)
+            .addGap(0, 1056, Short.MAX_VALUE)
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 713, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Persona");
@@ -58,6 +60,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        menuBuscarPersona.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        menuBuscarPersona.setText("Buscar Persona");
+        menuBuscarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBuscarPersonaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuBuscarPersona);
+
+        menuActualizarPersona.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
+        menuActualizarPersona.setText("Actualizar Persona");
+        menuActualizarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuActualizarPersonaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuActualizarPersona);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -66,7 +86,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -74,7 +94,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -86,6 +106,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vi.setVisible(true);
         DesktopPane.add(vi);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void menuBuscarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarPersonaActionPerformed
+        // TODO add your handling code here:
+         VentanaLeerPersona vl=new VentanaLeerPersona();
+        vl.setVisible(true);
+        DesktopPane.add(vl);
+    }//GEN-LAST:event_menuBuscarPersonaActionPerformed
+
+    private void menuActualizarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActualizarPersonaActionPerformed
+        // TODO add your handling code here:
+         VentanaActualizarPersona vap=new VentanaActualizarPersona();
+        vap.setVisible(true);
+        DesktopPane.add(vap);
+    }//GEN-LAST:event_menuActualizarPersonaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,5 +161,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem menuActualizarPersona;
+    private javax.swing.JMenuItem menuBuscarPersona;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,12 +8,7 @@ package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorPersona;
 import ec.edu.ups.modelo.Persona;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
+public class VentanaLeerPersona extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VentanaIngresarPersona
+     * Creates new form VentanaLeerPersona
      */
-    public VentanaIngresarPersona() {
+    public VentanaLeerPersona() {
         initComponents();
     }
 
@@ -57,11 +52,13 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         txtCelular = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
+        txtPosicion = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Ingresar Persona");
+        setTitle("Buscar Persona");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("APELLIDOS");
@@ -75,18 +72,23 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("EDAD");
 
+        txtApellidos.setEnabled(false);
         txtApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidosActionPerformed(evt);
             }
         });
 
+        txtNombres.setEnabled(false);
         txtNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombresActionPerformed(evt);
             }
         });
 
+        txtEdad.setEnabled(false);
+
+        txtCedula.setEnabled(false);
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
@@ -102,7 +104,7 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         });
 
         btnVerifica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnVerifica.setText("INGRESAR Y VALIDAR");
+        btnVerifica.setText("BUSCAR");
         btnVerifica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificaActionPerformed(evt);
@@ -115,8 +117,17 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("CELULAR");
 
+        txtFecha.setEnabled(false);
+
+        txtCelular.setEnabled(false);
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("SALARIO");
+
+        txtSalario.setEnabled(false);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("INGRESE REGISTRO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,23 +148,38 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addComponent(txtCedula)
+                            .addComponent(txtApellidos)
                             .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFecha)
                             .addComponent(txtCelular)
                             .addComponent(txtSalario)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(btnVerifica)
-                        .addGap(18, 18, 18)
+                        .addGap(320, 320, 320)
                         .addComponent(btnCancelar)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txtPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btnVerifica)
+                .addGap(115, 115, 115))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnVerifica, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                            .addComponent(txtPosicion)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,19 +198,17 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtFecha)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(txtCelular))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(txtSalario))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVerifica, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
 
@@ -192,74 +216,29 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
-            Persona p=new Persona();
-        try {
-            p.setNombres(txtNombres.getText());
-             }catch(Exception ex){
-           JOptionPane.showMessageDialog(this, ex.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
-        }
-        try {
-            p.setApellidos(txtApellidos.getText());
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(this, exc.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
-        }
-        try {
-            p.setCedula(txtCedula.getText());
-        } catch (Exception exp) {
-             JOptionPane.showMessageDialog(this, exp.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
-        }
-        try {
-            p.setEdad(Integer.parseInt(txtEdad.getText()));
-        } catch (Exception excep) {
-             JOptionPane.showMessageDialog(this, excep.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
-        }
-        p.setNumeroTelefono(txtCelular.getText());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String Fecha=txtFecha.getText();   
-        try {
-            Date fecha1=formatter.parse(Fecha);
-            p.setFechaNacimiento(fecha1);
-                    } catch (ParseException ex4) {
-             JOptionPane.showMessageDialog(this, ex4.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
-        }
-        p.setSalario(Double.parseDouble(txtSalario.getText()));
-        
-        ControladorPersona cp=new ControladorPersona();
-        cp.IngresarPersona(p);
-        JOptionPane.showMessageDialog(this, "Persona Creada");
-        txtNombres.setText("");
-        txtApellidos.setText("");
-        txtCedula.setText("");
-        txtEdad.setText("");
-        txtFecha.setText("");
-        txtCelular.setText("");
-        txtSalario.setText("");
-                                 
-    }//GEN-LAST:event_btnVerificaActionPerformed
+    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidosActionPerformed
 
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombresActionPerformed
-
-    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidosActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
@@ -269,6 +248,27 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
+      
+      int pos=Integer.parseInt(txtPosicion.getText());
+        ControladorPersona cp=new ControladorPersona();
+          try {
+              Persona p=cp.Leer(pos);
+              txtNombres.setText(p.getNombres());
+              txtApellidos.setText(p.getApellidos());
+              txtCedula.setText(p.getCedula());
+              txtEdad.setText(String.valueOf(p.getEdad()));
+              SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+              String fecha=formatter.format(p.getFechaNacimiento());
+              txtFecha.setText(fecha);
+              txtCelular.setText(p.getNumeroTelefono());
+              txtSalario.setText(String.valueOf(p.getSalario()));
+              JOptionPane.showMessageDialog(this, "Persona Encontrada");
+          } catch (Exception ex) {
+              System.out.println("Error al leer Persona");
+          }
+    }//GEN-LAST:event_btnVerificaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -281,6 +281,7 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;
@@ -288,6 +289,7 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtPosicion;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables
 }
