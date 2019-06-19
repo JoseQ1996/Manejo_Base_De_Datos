@@ -6,6 +6,12 @@
 
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorPersona;
+import ec.edu.ups.modelo.Persona;
+import java.text.SimpleDateFormat;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
@@ -15,10 +21,31 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaListarPersona
      */
-    public VentanaListarPersona() {
+    public static DefaultTableModel modelo;
+    public VentanaListarPersona() throws Exception {
         initComponents();
+         modelo = new DefaultTableModel();
+        Object[] columnas ={"NOMBRES","APELLIDOS","CEDULA","EDAD","FECHA DE NACIMIENTO","CELULAR","SALARIO"};
+        modelo.setColumnIdentifiers(columnas);
+        tblPersonas.setModel(modelo);
+        llenarTabla();
     }
-
+    public void llenarTabla() throws Exception{
+        ControladorPersona cp=new ControladorPersona();
+    Set<Persona> Lista =cp.getLista();
+    for(Persona persona : Lista){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha=formatter.format(persona.getFechaNacimiento());
+        Object[] datos = {persona.getNombres(),
+            persona.getApellidos(),
+            persona.getCedula(),
+            persona.getEdad(),
+            fecha,
+            persona.getNumeroTelefono(),
+            persona.getSalario()};
+        modelo.addRow(datos);
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,15 +55,38 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPersonas = new javax.swing.JTable();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Listar Personas");
+
+        tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NOMBRES", "APELLIDOS", "CEDULA", "EDAD", "FECHA DE NACIMIENTO", "CELULAR", "SALARIO"
+            }
+        ));
+        jScrollPane1.setViewportView(tblPersonas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -44,5 +94,7 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblPersonas;
     // End of variables declaration//GEN-END:variables
 }

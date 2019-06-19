@@ -6,6 +6,9 @@
 
 package ec.edu.ups.vista;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author José Quinde
@@ -36,6 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuActualizarPersona = new javax.swing.JMenuItem();
         menuEliminarPersona = new javax.swing.JMenuItem();
         menuListarPersonas = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,11 +47,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         DesktopPane.setLayout(DesktopPaneLayout);
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1056, Short.MAX_VALUE)
+            .addGap(0, 1167, Short.MAX_VALUE)
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGap(0, 773, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Persona");
@@ -100,15 +104,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        menuSalir.setText("Salir");
+        menuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSalirMouseClicked(evt);
+            }
+        });
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSalir);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(DesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +158,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void menuListarPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarPersonasActionPerformed
         // TODO add your handling code here:
+        VentanaListarPersona vlis = null;
+        try {
+            vlis = new VentanaListarPersona();
+        } catch (Exception ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vlis.setVisible(true);
+        DesktopPane.add(vlis);
     }//GEN-LAST:event_menuListarPersonasActionPerformed
 
     private void menuEliminarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEliminarPersonaActionPerformed
@@ -151,6 +174,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ve.setVisible(true);
         DesktopPane.add(ve);
     }//GEN-LAST:event_menuEliminarPersonaActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void menuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSalirMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_menuSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -196,5 +229,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuBuscarPersona;
     private javax.swing.JMenuItem menuEliminarPersona;
     private javax.swing.JMenuItem menuListarPersonas;
+    private javax.swing.JMenu menuSalir;
     // End of variables declaration//GEN-END:variables
 }

@@ -183,29 +183,34 @@ public class ControladorPersona {
         * Metodo que sirve para eliminar una persona
         * @param pos 
         */ 
-       public void EliminarPersona(int pos){
+       public int EliminarPersona(int pos){
            try{
         RandomAccessFile archivo=new RandomAccessFile(ruta,"rw");
         pos=pos-1;
         pos=pos*152;
-        archivo.seek(pos);
-        if(archivo.readUTF()!=null){
-        archivo.seek(pos);    
+        archivo.seek(pos);   
         String vacio=" ";
                for (int i = 1; i < 150; i++) {
                   vacio=vacio+" "; 
                }
+           String v=archivo.readUTF();
+               if(v.equals(vacio) ){
+                   JOptionPane.showMessageDialog (null,"La persona Ya No Existe");
+                   return 0;
+                   }else{    
+          archivo.seek(pos);           
           archivo.writeUTF(vacio);
          System.out.println("total bytes: "+archivo.length());
         archivo.close();
-        }else{
-           JOptionPane.showMessageDialog (null,"La persona No existe");  
-        }
+        return 1;
+               }
+ 
          }catch(FileNotFoundException ex9){
             System.out.println("Archivo no encontrado");
         } catch (IOException ex10) {
             System.out.println("Error de escritura");;
         }
+           return 0;
        } 
        /**
         * Retorna la lista de los registro grabados en la base de datos
@@ -218,12 +223,19 @@ public class ControladorPersona {
         long registros=archivo.length()/152;
         System.out.println("numero de registros: "+registros);
         int pos=0;
+        String vacio=" ";
+               for (int i = 1; i < 150; i++) {
+                  vacio=vacio+" "; 
+               }
         for(int i = 0; i < registros; i++) {
-                pos=i;
+               pos=i;
                pos=pos* 152;
                archivo.seek(pos);
                Persona p=new Persona ();
-               if(archivo.readUTF() != "      "){
+               String v=archivo.readUTF();
+               if(v.equals(vacio) ){
+                   
+                   }else{ 
                 archivo.seek(pos);     
                 p.setNombres(archivo.readUTF().trim());
                 archivo.seek(pos+52);
@@ -241,8 +253,7 @@ public class ControladorPersona {
                 archivo.seek(pos+144);
                 p.setSalario(archivo.readDouble());
                  lista.add(p);
-               }else{
-                 i++;  
+                 
                }
                    }
            archivo.close();     

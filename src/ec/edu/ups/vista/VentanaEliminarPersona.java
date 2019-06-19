@@ -114,9 +114,15 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
 
         int pos=Integer.parseInt(txtPosicion.getText());
         ControladorPersona cp=new ControladorPersona();
-        cp.EliminarPersona(pos);
+        int a=cp.EliminarPersona(pos);
+        if (a==1){
         JOptionPane.showMessageDialog(this, "La persona con el registro "+pos+" Ha sido Eliminada");
         txtPosicion.setText("");
+        }
+        if (a==0){
+          JOptionPane.showMessageDialog(this, "Intente con otro Registro");
+        txtPosicion.setText("");  
+        }
     }//GEN-LAST:event_btnVerificaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
