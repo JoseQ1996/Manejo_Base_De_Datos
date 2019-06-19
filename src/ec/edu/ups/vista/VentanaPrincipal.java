@@ -34,6 +34,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         menuBuscarPersona = new javax.swing.JMenuItem();
         menuActualizarPersona = new javax.swing.JMenuItem();
+        menuEliminarPersona = new javax.swing.JMenuItem();
+        menuListarPersonas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +80,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuActualizarPersona);
 
+        menuEliminarPersona.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        menuEliminarPersona.setText("Eliminar Persona ");
+        menuEliminarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEliminarPersonaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuEliminarPersona);
+
+        menuListarPersonas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        menuListarPersonas.setText("Listar Personas");
+        menuListarPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListarPersonasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuListarPersonas);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -121,6 +141,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         DesktopPane.add(vap);
     }//GEN-LAST:event_menuActualizarPersonaActionPerformed
 
+    private void menuListarPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarPersonasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuListarPersonasActionPerformed
+
+    private void menuEliminarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEliminarPersonaActionPerformed
+        // TODO add your handling code here:
+        VentanaEliminarPersona ve=new VentanaEliminarPersona();
+        ve.setVisible(true);
+        DesktopPane.add(ve);
+    }//GEN-LAST:event_menuEliminarPersonaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -163,5 +194,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem menuActualizarPersona;
     private javax.swing.JMenuItem menuBuscarPersona;
+    private javax.swing.JMenuItem menuEliminarPersona;
+    private javax.swing.JMenuItem menuListarPersonas;
     // End of variables declaration//GEN-END:variables
 }

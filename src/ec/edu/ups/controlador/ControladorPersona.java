@@ -12,23 +12,33 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jose Quinde
  */
 public class ControladorPersona {
+       //Declaracion Variables
        String ruta;
        SimpleDateFormat formatter ;
-
+       private Set<Persona> lista;
+       /**
+        * Controlador inicializa el formato de fecha y la ruta del archivo
+        */
     public ControladorPersona() {
+        //lista = new HashSet<>();
         ruta="C:\\Users\\Usuario\\Documents\\NetBeansProjects\\Excepciones\\src\\ec\\edu\\ups\\archivos\\archivo.ups";
         formatter = new SimpleDateFormat("dd/MM/yyyy");
+        
     }
-       
-       
-       
-       public void IngresarPersona(Persona p){
+    /**
+     * Metodo que sirve para ingresar una persona en un archivo binario randomico
+     * @param p 
+     */   
+    public void IngresarPersona(Persona p){
         try{
         RandomAccessFile archivo=new RandomAccessFile(ruta,"rw");
         //Escribe desde el final del archivo
@@ -70,7 +80,12 @@ public class ControladorPersona {
             System.out.println("Error de escritura");;
         }
        }
-       
+       /**
+        * Metodo que sirve para leer un registro de una persona en el archivo binario a traves de la posicion del registro
+        * @param pos
+        * @return
+        * @throws Exception 
+        */
        public Persona Leer(int pos) throws Exception{
            pos=pos-1;
            pos=pos*152;
@@ -80,7 +95,8 @@ public class ControladorPersona {
         Persona p=new Persona();
         //Leer archivo binario
         archivo.seek(pos);
-
+         if(archivo.readUTF()!=null){
+        archivo.seek(pos);     
         p.setNombres(archivo.readUTF().trim());
         archivo.seek(pos+52);
         p.setApellidos(archivo.readUTF().trim());
@@ -98,6 +114,10 @@ public class ControladorPersona {
         p.setSalario(archivo.readDouble());
         archivo.close();
         return p;
+         }else{
+            JOptionPane.showMessageDialog (null,"La persona No existe");
+                 
+        }
         }catch(FileNotFoundException ex){
             System.out.println("Archivo no encontrado");
         } catch (IOException ex) {
@@ -105,6 +125,11 @@ public class ControladorPersona {
         }
         return null;   
        }
+       /**
+        * Metodo que sirve para Actualizar un Persona en el archivo binario a traves de la posicion
+        * @param p
+        * @param pos 
+        */
         public void ActualizarPersona(Persona p,int pos){
         try{
         RandomAccessFile archivo=new RandomAccessFile(ruta,"rw");
@@ -113,7 +138,8 @@ public class ControladorPersona {
          pos=pos*152;
         archivo.seek(pos);
         //Escribir en archivo binario
-        
+        if(archivo.readUTF()!=null){
+        archivo.seek(pos);    
         String nombre=p.getNombres();
         String apellido=p.getApellidos();
         String cedula=p.getCedula();
@@ -143,10 +169,91 @@ public class ControladorPersona {
         
             System.out.println("total bytes: "+archivo.length());
         archivo.close();
+        }else{
+            JOptionPane.showMessageDialog (null,"La persona No existe");
+        }
          }catch(FileNotFoundException ex9){
             System.out.println("Archivo no encontrado");
         } catch (IOException ex10) {
             System.out.println("Error de escritura");;
         }
+        
        }
+       /**
+        * Metodo que sirve para eliminar una persona
+        * @param pos 
+        */ 
+       public void EliminarPersona(int pos){
+           try{
+        RandomAccessFile archivo=new RandomAccessFile(ruta,"rw");
+        pos=pos-1;
+        pos=pos*152;
+        archivo.seek(pos);
+        if(archivo.readUTF()!=null){
+        archivo.seek(pos);    
+        String vacio=" ";
+               for (int i = 1; i < 150; i++) {
+                  vacio=vacio+" "; 
+               }
+          archivo.writeUTF(vacio);
+         System.out.println("total bytes: "+archivo.length());
+        archivo.close();
+        }else{
+           JOptionPane.showMessageDialog (null,"La persona No existe");  
+        }
+         }catch(FileNotFoundException ex9){
+            System.out.println("Archivo no encontrado");
+        } catch (IOException ex10) {
+            System.out.println("Error de escritura");;
+        }
+       } 
+       /**
+        * Retorna la lista de los registro grabados en la base de datos
+        * @return 
+        */
+       public Set<Persona> getLista() throws Exception {
+        lista=new HashSet<Persona>();
+           try{
+        RandomAccessFile archivo=new RandomAccessFile(ruta,"rw");
+        long registros=archivo.length()/152;
+        System.out.println("numero de registros: "+registros);
+        int pos=0;
+        for(int i = 0; i < registros; i++) {
+                pos=i;
+               pos=pos* 152;
+               archivo.seek(pos);
+               Persona p=new Persona ();
+               if(archivo.readUTF() != "      "){
+                archivo.seek(pos);     
+                p.setNombres(archivo.readUTF().trim());
+                archivo.seek(pos+52);
+                p.setApellidos(archivo.readUTF().trim());
+                archivo.seek(pos+104);
+                p.setCedula(archivo.readUTF());
+                archivo.seek(pos+116);
+                p.setEdad(archivo.readInt());
+                archivo.seek(pos+120);
+                String fecha=archivo.readUTF();
+                Date fecha1=formatter.parse(fecha);
+                p.setFechaNacimiento(fecha1);
+                archivo.seek(pos+132);
+                p.setNumeroTelefono(archivo.readUTF());
+                archivo.seek(pos+144);
+                p.setSalario(archivo.readDouble());
+                 lista.add(p);
+               }else{
+                 i++;  
+               }
+                   }
+           archivo.close();     
+                
+        return lista;
+        }catch(FileNotFoundException ex9){
+            System.out.println("Archivo no encontrado");
+        } catch (IOException ex10) {
+            System.out.println("Error de escritura");;
+        }
+           return null;     
+       }
+       
 }

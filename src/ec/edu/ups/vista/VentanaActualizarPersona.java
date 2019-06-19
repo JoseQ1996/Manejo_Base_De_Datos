@@ -270,6 +270,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Persona Encontrada");
         } catch (Exception ex) {
             System.out.println("Error al leer Persona");
+            JOptionPane.showMessageDialog (this,"La persona No existe");
         }
     }//GEN-LAST:event_btnVerificaActionPerformed
 
