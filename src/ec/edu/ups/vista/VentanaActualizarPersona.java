@@ -11,6 +11,8 @@ import ec.edu.ups.modelo.Persona;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -296,7 +298,11 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
         } catch (Exception excep) {
             JOptionPane.showMessageDialog(this, excep.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
         }
-        p.setNumeroTelefono(txtCelular.getText());
+        try {
+            p.setNumeroTelefono(txtCelular.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(VentanaActualizarPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String Fecha=txtFecha.getText();
         try {

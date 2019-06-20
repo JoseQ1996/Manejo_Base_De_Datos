@@ -130,8 +130,13 @@ public class Persona {
         return numeroTelefono;
     }
 
-    public void setNumeroTelefono(String numeroTelefono) {
+    public void setNumeroTelefono(String numeroTelefono) throws Exception {
+          if(numeroTelefono.length()==10){
+            //Valida el numero de telefono
         this.numeroTelefono = numeroTelefono;
+          }else{
+            throw new Exception("Ingrese un numero de telefono de 10 digitos");
+        }
     }
 
     public Date getFechaNacimiento() {

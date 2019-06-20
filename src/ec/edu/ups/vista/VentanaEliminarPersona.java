@@ -37,6 +37,11 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         btnVerifica = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Elimnar Persona");
+
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +116,7 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
-
+        //Ingresa la posicion de la persona y luego manda a llamar al controlador para eliminar la persona del archivo
         int pos=Integer.parseInt(txtPosicion.getText());
         ControladorPersona cp=new ControladorPersona();
         int a=cp.EliminarPersona(pos);

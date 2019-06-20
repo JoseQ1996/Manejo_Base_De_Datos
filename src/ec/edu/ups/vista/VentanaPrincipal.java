@@ -42,6 +42,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manejo de Archivos Binarios Randomicos con CRUD");
 
         javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
         DesktopPane.setLayout(DesktopPaneLayout);

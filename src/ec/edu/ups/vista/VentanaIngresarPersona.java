@@ -229,7 +229,11 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         } catch (Exception excep) {
              JOptionPane.showMessageDialog(this, excep.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
         }
-        p.setNumeroTelefono(txtCelular.getText());
+        try {
+            p.setNumeroTelefono(txtCelular.getText());
+        } catch (Exception ex19) {
+            JOptionPane.showMessageDialog(this, ex19.getMessage(),"Error Exception",JOptionPane.OK_OPTION);
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String Fecha=txtFecha.getText();   
         try {

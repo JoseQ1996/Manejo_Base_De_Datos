@@ -11,8 +11,11 @@ package ec.edu.ups.modelo;
  * @author Jose Quinde
  */
 public class ValidacionCedula{
-    
-
+   /**
+    * Metodo que nos sirve para validar la cedula en la republica del Ecuador
+    * @param x
+    * @return 
+    */ 
   public static boolean validacion(String x){
     int sum=0;
       int a[]=new int [x.length()/2];
@@ -26,8 +29,7 @@ public class ValidacionCedula{
           b[i]=Integer.parseInt(String.valueOf(x.charAt(d)));
           d=d+2;
         }
-      }
-    
+      }    
       for (int i = 0; i < a.length; i++) {
         a[i]=a[i]*2;
         if (a[i] >9){
@@ -45,7 +47,5 @@ public class ValidacionCedula{
         }else{
           return false;
         }
-     
-  }
-  
+  } 
 }

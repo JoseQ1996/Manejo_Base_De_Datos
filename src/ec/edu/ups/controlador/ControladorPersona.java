@@ -253,11 +253,9 @@ public class ControladorPersona {
                 archivo.seek(pos+144);
                 p.setSalario(archivo.readDouble());
                  lista.add(p);
-                 
                }
                    }
-           archivo.close();     
-                
+        archivo.close();                 
         return lista;
         }catch(FileNotFoundException ex9){
             System.out.println("Archivo no encontrado");
