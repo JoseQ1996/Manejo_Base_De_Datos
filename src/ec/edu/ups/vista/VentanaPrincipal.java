@@ -6,6 +6,7 @@
 
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.BaseDeDatos;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

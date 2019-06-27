@@ -7,6 +7,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorPersona;
+import ec.edu.ups.controlador.ControladorPersonadb;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,7 +52,7 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("INGRESE REGISTRO DE PERSONA A ELIMINAR");
+        jLabel8.setText("INGRESE EL NUMERO DE CEDULA DE LA PERSONA A ELIMINAR");
 
         btnVerifica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnVerifica.setText("ELIMINAR PERSONA");
@@ -65,6 +66,7 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -74,12 +76,8 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
                         .addComponent(btnVerifica))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(171, 171, 171)
-                        .addComponent(txtPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 40, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,10 +97,10 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,17 +115,11 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
 
     private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
         //Ingresa la posicion de la persona y luego manda a llamar al controlador para eliminar la persona del archivo
-        int pos=Integer.parseInt(txtPosicion.getText());
-        ControladorPersona cp=new ControladorPersona();
-        int a=cp.EliminarPersona(pos);
-        if (a==1){
-        JOptionPane.showMessageDialog(this, "La persona con el registro "+pos+" Ha sido Eliminada");
+        String cedula=txtPosicion.getText();
+        ControladorPersonadb controladorPersonadb=new ControladorPersonadb();
+        controladorPersonadb.delete(cedula);
+        JOptionPane.showMessageDialog(this, "La persona con el numero de cedula de "+cedula+" Ha sido Eliminada");
         txtPosicion.setText("");
-        }
-        if (a==0){
-          JOptionPane.showMessageDialog(this, "Intente con otro Registro");
-        txtPosicion.setText("");  
-        }
     }//GEN-LAST:event_btnVerificaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

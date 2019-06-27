@@ -7,6 +7,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorPersona;
+import ec.edu.ups.controlador.ControladorPersonadb;
 import ec.edu.ups.modelo.Persona;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -244,8 +245,10 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
         }
         p.setSalario(Double.parseDouble(txtSalario.getText()));
         
-        ControladorPersona cp=new ControladorPersona();
-        cp.IngresarPersona(p);
+        //ControladorPersona cp=new ControladorPersona();
+        //cp.IngresarPersona(p);
+        ControladorPersonadb controladorPersonadb=new ControladorPersonadb();
+        controladorPersonadb.create(p);
         JOptionPane.showMessageDialog(this, "Persona Creada");
         txtNombres.setText("");
         txtApellidos.setText("");
