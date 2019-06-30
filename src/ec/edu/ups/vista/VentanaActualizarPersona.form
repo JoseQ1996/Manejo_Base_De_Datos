@@ -52,7 +52,7 @@
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jLabel8" pref="193" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPosicion" min="-2" pref="188" max="-2" attributes="0"/>
+                  <Component id="txtCedula" min="-2" pref="188" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="btnVerifica" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
@@ -110,7 +110,7 @@
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnVerifica" alignment="0" pref="42" max="32767" attributes="0"/>
-                              <Component id="txtPosicion" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtCedula" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -247,7 +247,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtSalario">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPosicion">
+        <Component class="javax.swing.JTextField" name="txtCedula">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>

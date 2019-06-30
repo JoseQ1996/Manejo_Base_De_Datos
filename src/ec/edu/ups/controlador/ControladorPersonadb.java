@@ -7,6 +7,7 @@
 package ec.edu.ups.controlador;
 
 import ec.edu.ups.modelo.Persona;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -17,11 +18,16 @@ import java.text.SimpleDateFormat;
  */
 public class ControladorPersonadb {
     private BaseDeDatos db;
-
+    /**
+     * Inicializa la clase base de datos para la conexion
+     */
     public ControladorPersonadb() {
         db=new BaseDeDatos();
     }
-    
+    /**
+     * Metodo que sirve para crear una persona en una base de datos
+     * @param p 
+     */
     public void create(Persona p){
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");        
         String fecha=sd.format(p.getFechaNacimiento());
@@ -43,7 +49,11 @@ public class ControladorPersonadb {
         }
         
     }
-    
+    /**
+     * Metodo que sirve para actualizar una persona en una base de datos a traves de su cedula
+     * @param p
+     * @param cedula 
+     */
     public void update(Persona p,String cedula){
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
         String fecha=sd.format(p.getFechaNacimiento());
@@ -66,6 +76,10 @@ public class ControladorPersonadb {
         }
                 
     }
+    /**
+     * Metodo que sirve para eliminar una persona de la base de datos a traves de su cedula
+     * @param cedula 
+     */
     public void delete(String cedula){
         String sql="DELETE FROM  \"PERSONA\" WHERE"+" \"PER_CEDULA\"= "+"'"+cedula+"'";
         System.out.println(sql);
@@ -77,6 +91,35 @@ public class ControladorPersonadb {
         }catch(SQLException ex){
             ex.printStackTrace();
         }
+    }
+    /**
+     * Metodo que sirve para buscar en la base de datos una persona a traves de su cedula
+     * @param cedula
+     * @return
+     * @throws Exception 
+     */
+    public Persona search(String cedula) throws Exception {
+        Persona p=new Persona();
+        String SQL = "SELECT * FROM \"PERSONA\" WHERE \"PER_CEDULA\"=" + "'"+cedula+"'";
+        db.conectar();
+        try {
+            Statement sta = db.getConexionDb().createStatement();
+            ResultSet res = sta.executeQuery(SQL);
+            res.next();
+            p.setCedula(res.getString("PER_CEDULA"));
+            p.setNombres(res.getString("PER_NOMBRE"));
+            p.setApellidos(res.getString("PER_APELLIDO"));
+            p.setEdad(res.getInt("PER_EDAD"));
+            p.setFechaNacimiento(res.getDate("PER_FECHA_NACIMIENTO"));
+            p.setNumeroTelefono(res.getString("PER_CELULAR"));
+            p.setSalario(res.getDouble("PER_SALARIO"));
+            res.close();
+            sta.close();
+            db.desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error en buscar Persona");
+        }
+        return p;
     }
     
 }

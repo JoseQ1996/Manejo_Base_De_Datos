@@ -54,7 +54,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
         txtCelular = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
-        txtPosicion = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnVerifica1 = new javax.swing.JButton();
 
@@ -128,7 +128,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(btnVerifica)
                 .addGap(115, 115, 115))
@@ -172,7 +172,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
                         .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnVerifica, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(txtPosicion)))
+                            .addComponent(txtCedula)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -241,14 +241,13 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
-        /*
-        pos=Integer.parseInt(txtPosicion.getText());
-        ControladorPersona cp=new ControladorPersona();
+        
+        cedula=txtCedula.getText();
+        ControladorPersonadb cp=new ControladorPersonadb();
         try {
-            Persona p=cp.Leer(pos);
+            Persona p=cp.search(cedula);
             txtNombres.setText(p.getNombres());
             txtApellidos.setText(p.getApellidos());
-            txtCedula.setText(p.getCedula());
             txtEdad.setText(String.valueOf(p.getEdad()));
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String fecha=formatter.format(p.getFechaNacimiento());
@@ -260,11 +259,11 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
             System.out.println("Error al leer Persona");
             JOptionPane.showMessageDialog (this,"La persona No existe");
         }
-                */
+                
     }//GEN-LAST:event_btnVerificaActionPerformed
 
     private void btnVerifica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifica1ActionPerformed
-        cedula=txtPosicion.getText();
+        cedula=txtCedula.getText();
         Persona p=new Persona();
         try {
             p.setNombres(txtNombres.getText());
@@ -304,7 +303,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
         ControladorPersonadb controladorPersonadb=new ControladorPersonadb();
         controladorPersonadb.update(p, cedula);
         JOptionPane.showMessageDialog(this, "La Persona ha sido Actualizada");
-        txtPosicion.setText("");
+        txtCedula.setText("");
         txtNombres.setText("");
         txtApellidos.setText("");
         txtEdad.setText("");
@@ -328,11 +327,11 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtNombres;
-    private javax.swing.JTextField txtPosicion;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables
 }
