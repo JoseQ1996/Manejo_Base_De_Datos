@@ -7,6 +7,7 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.BaseDeDatos;
+import ec.edu.ups.controlador.ControladorDirecciondb;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +20,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaIngreso
      */
+     
     public VentanaPrincipal() {
+ 
         initComponents();
     }
 
@@ -223,7 +226,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane DesktopPane;
+    public static javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
