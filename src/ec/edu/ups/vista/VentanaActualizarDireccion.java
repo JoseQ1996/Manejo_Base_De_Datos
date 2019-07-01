@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class VentanaAñadirDireccion extends javax.swing.JInternalFrame {
+public class VentanaActualizarDireccion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VentanaAñadirDireccion
      */
     private ControladorDirecciondb controladorDirecciondb;
-    public VentanaAñadirDireccion() {
+    public VentanaActualizarDireccion() {
         initComponents();
         controladorDirecciondb= new ControladorDirecciondb();
         txtCodigo.setText(String.valueOf(controladorDirecciondb.buscarUltimoCodigo()+1));
@@ -212,7 +212,7 @@ public class VentanaAñadirDireccion extends javax.swing.JInternalFrame {
         d.setCalle_principal(txtCallePrim.getText());
         d.setCalle_secundaria(txtCalleSec.getText());
         d.setNumero(Integer.parseInt(txtNum.getText()));
-        String cedula=VentanaIngresarPersona.cedula;
+        String cedula=VentanaActualizarPersona.cedula;
         d.setCedula_per(cedula);
         controladorDirecciondb.create(d);
         JOptionPane.showMessageDialog(this, "Direccion Agregada");
@@ -220,8 +220,8 @@ public class VentanaAñadirDireccion extends javax.swing.JInternalFrame {
         txtCallePrim.setText("");
         txtCalleSec.setText("");
         txtNum.setText("");
-        VentanaIngresarPersona.limpiarDatos();
-        VentanaIngresarPersona.llenarDatos();
+        VentanaActualizarPersona.limpiarDatos();
+        VentanaActualizarPersona.llenarDatos();
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed

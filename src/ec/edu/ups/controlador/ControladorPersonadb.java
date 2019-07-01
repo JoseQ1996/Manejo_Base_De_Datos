@@ -65,7 +65,7 @@ public class ControladorPersonadb {
                                                    "\"PER_CELULAR\"='"+p.getNumeroTelefono()+"',"+
                                                     "\"PER_SALARIO\"="+p.getSalario()
                 +" WHERE"+" \"PER_CEDULA\"="+"'"+cedula+"'";
-        System.out.println(sql);
+        //System.out.println(sql);
          db.conectar();
         try{
         Statement sta=db.getConexionDb().createStatement();
@@ -82,7 +82,6 @@ public class ControladorPersonadb {
      */
     public void delete(String cedula){
         String sql="DELETE FROM  \"PERSONA\" WHERE"+" \"PER_CEDULA\"= "+"'"+cedula+"'";
-        System.out.println(sql);
          db.conectar();
         try{
         Statement sta=db.getConexionDb().createStatement();

@@ -42,10 +42,13 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
          listaDirecciones=controladorDirecciondb.listaDirecciones();
          for (Direccion d:listaDirecciones ) {
              if(cedula.equals(d.getCedula_per())){
-                VentanaIngresarPersona.cbxDirecciones.addItem(d.getCalle_principal()+"_"+d.getCalle_secundaria()+" ("+d.getNumero()+")");
+                cbxDirecciones.addItem(d.getCalle_principal()+"_"+d.getCalle_secundaria()+" ("+d.getNumero()+")");
              }
         }
     }
+    public static void limpiarDatos(){
+         cbxDirecciones.removeAllItems();
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -321,6 +324,7 @@ public class VentanaIngresarPersona extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //cbxDirecciones.removeAllItems();
         cedula=txtCedula.getText();
         VentanaAñadirDireccion anadiDireccion = new VentanaAñadirDireccion();
         VentanaPrincipal.DesktopPane.add(anadiDireccion);

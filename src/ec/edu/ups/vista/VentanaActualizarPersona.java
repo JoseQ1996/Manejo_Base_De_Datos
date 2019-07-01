@@ -6,12 +6,18 @@
 
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorDirecciondb;
 import ec.edu.ups.controlador.ControladorPersona;
 import ec.edu.ups.controlador.ControladorPersonadb;
+import ec.edu.ups.modelo.Direccion;
 import ec.edu.ups.modelo.Persona;
+import static ec.edu.ups.vista.VentanaIngresarPersona.cedula;
+import static ec.edu.ups.vista.VentanaIngresarPersona.controladorDirecciondb;
+import static ec.edu.ups.vista.VentanaIngresarPersona.listaDirecciones;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,11 +31,24 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaActualizarPersona
      */
-    private String cedula;
+    public static String cedula;
+    public static Set<Direccion> listaDirecciones;
+    public static ControladorDirecciondb controladorDirecciondb;
     public VentanaActualizarPersona() {
+        controladorDirecciondb=new ControladorDirecciondb();
         initComponents();
     }
-
+     public static  void llenarDatos(){
+         listaDirecciones=controladorDirecciondb.listaDirecciones();
+         for (Direccion d:listaDirecciones ) {
+             if(cedula.equals(d.getCedula_per())){
+                cbxDirecciones.addItem(d.getCalle_principal()+"_"+d.getCalle_secundaria()+" ("+d.getNumero()+")");
+             }
+        }
+    }
+     public static void limpiarDatos(){
+         cbxDirecciones.removeAllItems();
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +76,10 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
         txtCedula = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnVerifica1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        cbxDirecciones = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -120,49 +143,76 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("DIRECCIONES");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jButton1.setText("AGREGAR DIRECCION");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminar.setText("ELIMINAR DIRECCION");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(229, 229, 229)
                 .addComponent(btnVerifica)
                 .addGap(115, 115, 115))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnVerifica1))
+                        .addGap(57, 57, 57)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCelular)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                    .addComponent(txtSalario)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCelular)
+                                        .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                        .addComponent(txtSalario))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbxDirecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton1)
+                                            .addComponent(btnEliminar)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(btnCancelar))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(128, 128, 128)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                                        .addComponent(txtApellidos))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(128, 128, 128)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(txtApellidos))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(101, 101, 101)
+                        .addComponent(btnVerifica1)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnCancelar)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,13 +220,13 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnVerifica, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(txtCedula)))
+                        .addComponent(btnVerifica, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -201,27 +251,34 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
                     .addComponent(txtSalario)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxDirecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerifica1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+                    .addComponent(btnVerifica1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -241,7 +298,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
-        
+        cbxDirecciones.removeAllItems();
         cedula=txtCedula.getText();
         ControladorPersonadb cp=new ControladorPersonadb();
         try {
@@ -254,6 +311,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
             txtFecha.setText(fecha);
             txtCelular.setText(p.getNumeroTelefono());
             txtSalario.setText(String.valueOf(p.getSalario()));
+            llenarDatos();
             JOptionPane.showMessageDialog(this, "Persona Encontrada");
         } catch (Exception ex) {
             System.out.println("Error al leer Persona");
@@ -313,11 +371,53 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnVerifica1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //cbxDirecciones.removeAllItems();
+        cedula=txtCedula.getText();
+        VentanaActualizarDireccion acDireccion = new VentanaActualizarDireccion();
+        VentanaPrincipal.DesktopPane.add(acDireccion);
+        acDireccion.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+         int filaSeleccionada = cbxDirecciones.getSelectedIndex();
+        if (filaSeleccionada >= 0) {
+            String total=(String) cbxDirecciones.getSelectedItem();
+            //System.out.println(total);
+             String[] cadena=total.split("_");
+             String callePrin=cadena[0];
+             String auxiliar=cadena[1];
+             String extraido= auxiliar.substring(auxiliar.length()-5);
+             String calleSec=auxiliar.replace(extraido,""); 
+             String aux2=extraido.substring(extraido.length()-3);
+             String numero=aux2.replace(")","");
+             /*
+             System.out.println("Calle Principal: "+callePrin);
+             System.out.println("Calle Secundaria: "+calleSec);
+              System.out.println("Numero: "+numero);
+                     */
+              int numeroDir=Integer.parseInt(numero);
+              controladorDirecciondb.deleteDir(callePrin, calleSec, numeroDir);
+             JOptionPane.showMessageDialog(rootPane, "La direccion a sido eliminada");
+             cbxDirecciones.removeAllItems();
+             llenarDatos();
+            
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Error Seleccione Compra");
+        }
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnVerifica;
     private javax.swing.JButton btnVerifica1;
+    public static javax.swing.JComboBox cbxDirecciones;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -325,6 +425,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCedula;

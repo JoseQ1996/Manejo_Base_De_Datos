@@ -69,7 +69,6 @@ public class ControladorDirecciondb {
      */
      public void delete(int codigo){
         String sql="DELETE FROM  \"DIRECCION\" WHERE"+" \"DIR_CODIGO\"= "+codigo+"";
-        System.out.println(sql);
          db.conectar();
         try{
         Statement sta=db.getConexionDb().createStatement();
@@ -107,5 +106,21 @@ public class ControladorDirecciondb {
         }
         return direcciones;
     }
-    
+      /**
+       * Este metodo nos elimina una direccion al momento de actualizar un persona
+       * @param callePrin
+       * @param CalleSec
+       * @param numero 
+       */
+     public void deleteDir(String callePrin,String CalleSec,int numero){
+        String sql="DELETE FROM \"DIRECCION\" WHERE"+" \"DIR_CALLE_PRINCIPAL\"= '"+callePrin+"' AND "+"\"DIR_CALLE_SECUNDARIA\"= '"+CalleSec+"' AND "+"\"DIR_NUMERO\"="+numero;
+         db.conectar();
+        try{
+        Statement sta=db.getConexionDb().createStatement();
+        sta.execute(sql);
+        db.desconectar();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
 }
