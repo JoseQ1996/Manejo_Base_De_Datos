@@ -6,6 +6,7 @@
 
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorDirecciondb;
 import ec.edu.ups.controlador.ControladorPersona;
 import ec.edu.ups.controlador.ControladorPersonadb;
 import javax.swing.JOptionPane;
@@ -117,7 +118,9 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
         //Ingresa la posicion de la persona y luego manda a llamar al controlador para eliminar la persona del archivo
         String cedula=txtPosicion.getText();
         ControladorPersonadb controladorPersonadb=new ControladorPersonadb();
+        ControladorDirecciondb controladorDirecciondb=new ControladorDirecciondb();
         controladorPersonadb.delete(cedula);
+        controladorDirecciondb.deletePersona(cedula);
         JOptionPane.showMessageDialog(this, "La persona con el numero de cedula de "+cedula+" Ha sido Eliminada");
         txtPosicion.setText("");
     }//GEN-LAST:event_btnVerificaActionPerformed

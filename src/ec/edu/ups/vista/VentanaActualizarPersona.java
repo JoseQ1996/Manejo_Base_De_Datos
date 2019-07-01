@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Usuario
+ * @author José Quinde
  */
 public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
 
@@ -38,6 +38,9 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
         controladorDirecciondb=new ControladorDirecciondb();
         initComponents();
     }
+    /**
+     * Llena los datos del comboBox con las direcciones de la persona dependiendo la cedula
+     */
      public static  void llenarDatos(){
          listaDirecciones=controladorDirecciondb.listaDirecciones();
          for (Direccion d:listaDirecciones ) {
@@ -46,6 +49,9 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
              }
         }
     }
+     /**
+     * Limpia el comboBox
+     */
      public static void limpiarDatos(){
          cbxDirecciones.removeAllItems();
      }

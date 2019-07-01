@@ -102,7 +102,7 @@ public class ControladorDirecciondb {
             res.close();
             db.desconectar();
         } catch (SQLException ex) {
-            System.out.println("Error Listar Autores: " + ex);
+            System.out.println("Error Listar Personas: " + ex);
         }
         return direcciones;
     }
@@ -114,6 +114,21 @@ public class ControladorDirecciondb {
        */
      public void deleteDir(String callePrin,String CalleSec,int numero){
         String sql="DELETE FROM \"DIRECCION\" WHERE"+" \"DIR_CALLE_PRINCIPAL\"= '"+callePrin+"' AND "+"\"DIR_CALLE_SECUNDARIA\"= '"+CalleSec+"' AND "+"\"DIR_NUMERO\"="+numero;
+         db.conectar();
+        try{
+        Statement sta=db.getConexionDb().createStatement();
+        sta.execute(sql);
+        db.desconectar();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+     /**
+      * Elimina las direcciones de la persona dependiendo la cedula
+      * @param cedula 
+      */
+     public void deletePersona(String cedula){
+        String sql="DELETE FROM  \"DIRECCION\" WHERE"+" \"DIR_CEDULA_PER\"= '"+cedula+"'";
          db.conectar();
         try{
         Statement sta=db.getConexionDb().createStatement();

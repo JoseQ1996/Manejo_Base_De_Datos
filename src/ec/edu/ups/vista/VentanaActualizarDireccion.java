@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Usuario
+ * @author José Quinde
  */
 public class VentanaActualizarDireccion extends javax.swing.JInternalFrame {
 

@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -120,5 +122,32 @@ public class ControladorPersonadb {
         }
         return p;
     }
-    
+    public Set<Persona> listaPersonas() throws Exception {
+        Set<Persona> personas = new HashSet<Persona>();
+        String sentenciaSQL = "SELECT * FROM \"PERSONA\" ";
+        db.conectar();
+        try {
+            Statement sta = db.getConexionDb().createStatement();
+            ResultSet res = sta.executeQuery(sentenciaSQL);
+            while (res.next()) {                
+                Persona p=new Persona();
+                p.setCedula(res.getString("PER_CEDULA"));
+                p.setNombres(res.getString("PER_NOMBRE"));
+                p.setApellidos(res.getString("PER_APELLIDO"));
+                p.setEdad(res.getInt("PER_EDAD"));
+                p.setFechaNacimiento(res.getDate("PER_FECHA_NACIMIENTO"));
+                p.setNumeroTelefono(res.getString("PER_CELULAR"));
+                p.setSalario(res.getDouble("PER_SALARIO"));                      
+                personas.add(p);
+            }
+            sta.close();
+            res.close();
+            db.desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error Listar Personas: " + ex);
+        }
+        return personas;
+    }
+            
+           
 }
