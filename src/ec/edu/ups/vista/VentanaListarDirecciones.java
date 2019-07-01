@@ -41,7 +41,6 @@ public class VentanaListarDirecciones extends javax.swing.JInternalFrame {
          for (Direccion d:listaDirecciones ) {
              if(cedula.equals(d.getCedula_per())){
                 Object[] datos = {d.getCodigo(),
-                d.getCodigo(),
                 d.getCalle_principal(),
                 d.getCalle_secundaria(),
                 d.getNumero()};

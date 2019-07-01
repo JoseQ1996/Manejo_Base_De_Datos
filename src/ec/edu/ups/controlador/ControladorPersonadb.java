@@ -122,6 +122,11 @@ public class ControladorPersonadb {
         }
         return p;
     }
+    /**
+     * Retorna la lista de Personas en la base de Datos
+     * @return
+     * @throws Exception 
+     */
     public Set<Persona> listaPersonas() throws Exception {
         Set<Persona> personas = new HashSet<Persona>();
         String sentenciaSQL = "SELECT * FROM \"PERSONA\" ";

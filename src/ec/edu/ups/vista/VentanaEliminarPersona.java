@@ -115,7 +115,7 @@ public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaActionPerformed
-        //Ingresa la posicion de la persona y luego manda a llamar al controlador para eliminar la persona del archivo
+        //Ingresa la cedula de la persona y luego manda a llamar al controlador para eliminar la persona del archivo
         String cedula=txtPosicion.getText();
         ControladorPersonadb controladorPersonadb=new ControladorPersonadb();
         ControladorDirecciondb controladorDirecciondb=new ControladorDirecciondb();
